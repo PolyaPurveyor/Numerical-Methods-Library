@@ -1,0 +1,105 @@
+PERSONAL CODING — PER-ITERATION INSTRUCTIONS
+
+Work only on the next requested increment.
+
+BEFORE WRITING CODE
+
+1. Inspect the relevant current files.
+2. Identify existing utilities, examples, and build targets that can be reused.
+3. Ask concise clarification questions only when the answers materially change the implementation.
+4. State the exact scope of the increment.
+5. Identify whether the work belongs in tooling/, libs/, sandbox/, playground/, tests/, cmake/, docs/, or scripts/.
+
+IMMEDIATE TARGET
+
+Describe one concrete behavior that will work at the end of the increment.
+
+Keep the target small enough to implement and verify in one focused session whenever practical.
+
+CURRENT STATE
+
+Briefly state:
+
+- What already works.
+- What is missing.
+- What existing code will be reused.
+- Any known constraint that affects this increment.
+
+FILES AFFECTED
+
+List only the files that need to change.
+
+Do not create new files unless they provide an immediate organizational or build benefit.
+
+MINIMUM CODE CHANGES
+
+Provide only:
+
+- Required declarations.
+- Required structure or class members.
+- Required function definitions.
+- Exact call sites or integration points.
+- Necessary CMake changes.
+- Small replacement snippets where needed.
+
+Do not include unrelated cleanup, speculative abstractions, or future infrastructure.
+
+IMPLEMENTATION ORDER
+
+Give a short sequence that can be followed directly.
+
+Prefer an order that produces an early compile or runnable checkpoint.
+
+BUILD AND RUN
+
+Provide the exact command or target needed to:
+
+- Configure.
+- Build.
+- Run.
+- Execute tests, when applicable.
+
+Reuse the existing project build workflow.
+
+TIME ESTIMATE
+
+Provide:
+
+- Expected coding time.
+- Expected build/integration time.
+- Likely debugging contingency.
+- Main technical risk.
+
+Estimate for one developer using the existing codebase.
+
+ACCEPTANCE TEST
+
+Define an observable success condition.
+
+The acceptance test should answer:
+
+- Does it compile?
+- What command should run successfully?
+- What output, behavior, file, image, or numeric value should appear?
+- What failure would show that the feature is incomplete?
+
+For numerical code, include tolerances or invariants.
+
+For graphics or interactive code, state what should be visible or controllable.
+
+For reusable code, include one direct usage case.
+
+STRETCH GOALS
+
+List no more than three optional improvements.
+
+Stretch goals must remain optional and must not expand the definition of completion.
+
+STOP CONDITION
+
+Once the acceptance test passes:
+
+1. Save or commit the working state.
+2. Record any known limitation discovered during testing.
+3. Stop expanding the implementation.
+4. Review the result before starting the next increment.

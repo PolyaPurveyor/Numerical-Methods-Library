@@ -1,0 +1,234 @@
+PERSONAL CODING — PROJECT-WIDE GUIDELINES
+
+PROJECT PURPOSE
+
+Treat Personal Coding as a long-term collection of practical programming work, reusable utilities, technical experiments, and focused learning projects.
+
+The project primarily covers:
+
+- Modern C++.
+- CMake-based builds.
+- Numerical methods and linear algebra.
+- Differential geometry.
+- Graphics and haptics infrastructure.
+- Linux development workflows.
+- Reusable tooling and small libraries.
+- Sandboxes and focused technical experiments.
+
+The objective is code that:
+
+- Solves the intended problem correctly.
+- Can be completed within realistic solo-developer time limits.
+- Is clear enough to revisit after a long break.
+- Can be reused when reuse provides an immediate benefit.
+- Supports learning through working implementations.
+- Avoids turning every experiment into a framework.
+
+QUALITY STANDARD
+
+Use a practical solo-developer quality standard.
+
+Prefer code that is:
+
+- Correct for the supported use case.
+- Easy to build and run.
+- Direct and understandable.
+- Modular enough to reuse where useful.
+- Tested at the level justified by the component.
+- Documented enough to recover intent and usage later.
+
+Do not default to enterprise, large-team, or public open-source standards.
+
+Avoid adding infrastructure whose primary purpose is:
+
+- Supporting hypothetical future users.
+- Anticipating every possible platform.
+- Generalizing a single working implementation.
+- Enforcing style through excessive indirection.
+- Replacing a simple solution with a framework.
+
+Use stronger engineering discipline for code placed in reusable libraries than for code in a sandbox or playground.
+
+REPOSITORY ORGANIZATION
+
+Use the existing project organization where applicable:
+
+procpp/
+  tooling/
+  libs/
+  sandbox/
+  playground/
+  tests/
+  cmake/
+  docs/
+  scripts/
+
+Use these areas as follows:
+
+- tooling/: Utilities used to build, inspect, generate, convert, or automate.
+- libs/: Reusable components with stable interfaces and basic tests.
+- sandbox/: Temporary investigations and disposable experiments.
+- playground/: Small demonstrations and examples that may remain useful.
+- tests/: Focused tests for reusable or failure-prone code.
+- cmake/: Shared CMake modules and build helpers.
+- docs/: Design notes, usage notes, and project decisions worth retaining.
+- scripts/: Small automation scripts and command-line workflows.
+
+Do not prematurely move exploratory code into libs/. Promote it only after it has a clear reusable purpose and a working example.
+
+IMPLEMENTATION STYLE
+
+Prefer:
+
+- Direct implementations.
+- Small, explicit data structures.
+- Focused free functions or small classes.
+- Standard-library facilities.
+- Existing project utilities.
+- Localized file-level changes.
+- Clear ownership and lifetime where resources are involved.
+- Normal code formatting with conventional indentation and line wrapping.
+
+Avoid:
+
+- Deep inheritance hierarchies.
+- Broad generic interfaces before multiple implementations need them.
+- Excessive template metaprogramming.
+- Unnecessary dependency injection.
+- Plugin systems for small projects.
+- Large refactors unrelated to the current task.
+- Rewriting working code solely for stylistic uniformity.
+
+When a reusable abstraction is justified, introduce the smallest abstraction that removes real duplication or clarifies a real boundary.
+
+C++ GUIDELINES
+
+Use modern C++ features when they make the code clearer or safer.
+
+Prefer:
+
+- RAII for owned resources.
+- Standard containers and algorithms.
+- Explicit types at public boundaries.
+- References or pointers that reflect actual ownership.
+- Small headers and focused translation units.
+- Const where it communicates real immutability without obstructing implementation.
+- Simple error handling appropriate to the program.
+
+Avoid:
+
+- Clever code that is harder to debug than the direct version.
+- Template-heavy designs for one or two concrete types.
+- Hidden global state unless the program structure genuinely requires it.
+- Unnecessary copies of large objects.
+- Mixing experimental and stable APIs without labeling the distinction.
+
+CMAKE AND DEPENDENCIES
+
+Keep CMake straightforward.
+
+For each buildable component:
+
+- State its target.
+- State its direct dependencies.
+- Keep target-specific include paths and compile options local to the target.
+- Prefer imported targets supplied by dependencies.
+- Avoid global compiler flags when target-level settings are sufficient.
+
+Add dependencies only when they save meaningful implementation time or provide capabilities that would be unreasonable to recreate.
+
+Do not add a package manager, code generator, or build abstraction unless the project currently benefits from it.
+
+TESTING AND VALIDATION
+
+Match validation effort to the component.
+
+For sandbox code:
+
+- A reproducible command and visible correct output may be sufficient.
+
+For reusable utilities:
+
+- Add focused tests for core behavior and likely failure cases.
+- Include at least one small usage example when the interface is not self-evident.
+
+For numerical code:
+
+- Test known values, invariants, tolerances, and boundary cases.
+- State units and coordinate conventions where relevant.
+
+For graphics, haptics, or hardware-dependent code:
+
+- Separate compile-time validation from hardware or visual validation.
+- Define what should be visible, felt, measured, or logged.
+
+Do not build a large test framework before the component warrants it.
+
+DOCUMENTATION
+
+Document decisions that would otherwise be difficult to reconstruct.
+
+For reusable components, record:
+
+- Purpose.
+- Supported use case.
+- Public entry points.
+- Dependencies.
+- Build/run command.
+- Important assumptions.
+- Known limitations.
+
+Keep comments focused on intent, constraints, units, and non-obvious reasoning. Do not narrate straightforward code line by line.
+
+INTERACTION AND RESPONSE STYLE
+
+Before answering a complex, broad, ambiguous, or multi-step coding request, ask concise clarifying questions when the answers would materially change the implementation.
+
+Do not ask clarifying questions for simple factual or procedural requests.
+
+Do not provide an entire program or large code dump unless explicitly requested.
+
+Provide:
+
+- The smallest useful implementation increment.
+- Exact files or sections affected.
+- Relevant declarations and functions.
+- Integration calls.
+- Build or test commands.
+- A concrete acceptance test.
+
+Use precise file-level edits rather than broad architectural advice when the user is actively implementing.
+
+TIME ESTIMATION
+
+Estimate for one developer using the current codebase and existing tools.
+
+Separate:
+
+- Direct coding time.
+- Build and integration time.
+- Debugging or platform contingency.
+
+Do not estimate as though the project must be productionized or prepared for a large team.
+
+Base estimates on:
+
+- Existing code that can be reused.
+- Familiarity with the language and libraries.
+- Whether hardware, graphics, drivers, or platform behavior are involved.
+- The amount of genuinely new behavior.
+
+Give one primary target and optional stretch goals when useful.
+
+VERSION CONTROL AND CHECKPOINTS
+
+After a meaningful working increment:
+
+- Commit or save a stable checkpoint.
+- Use a message that states the behavior added.
+- Avoid mixing unrelated cleanup with the feature commit.
+- Preserve working examples while experimenting with replacements.
+
+DECISION RULE
+
+Use the simplest implementation that works well for the current goal, remains understandable, and leaves a reasonable path for the next likely extension.
